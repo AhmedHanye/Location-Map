@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import LeafletMap from "./components/map/leafletMap";
 import { useState } from "react";
-import IpAddressInput from "./components/map/ipAddressInput";
+import IpAddressForm from "./components/map/ipAddressForm";
 
 const getMapData = async (ipAddress: string) => {
   const response = await fetch(`https://ipapi.co/${ipAddress}/json/`);
@@ -65,11 +65,14 @@ const App = () => {
   const handleSubmitIpAddress = (ip: string) => {
     setIpAddress(ip);
     refetch();
-  }
+  };
   return (
     <main className="h-screen relative">
       <LeafletMap coordinates={data || DEFAULT_COORDS} />
-      <IpAddressInput ipAddress={ipAddress} handleSubmitIpAddress={handleSubmitIpAddress} />
+      <IpAddressForm
+        ipAddress={ipAddress}
+        handleSubmitIpAddress={handleSubmitIpAddress}
+      />
     </main>
   );
 };
